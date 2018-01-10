@@ -19,3 +19,19 @@ nx_password = 'nxwitness'
 nx_client = pynetoptix.create_client(nx_username, nx_password)
 print(nx_client.system.get_cameras_ex())
 ```
+
+## Development
+
+```bash
+# Clone the repository from GitHub
+git clone git@github.com:davidvuong/pynetoptix.git
+
+# Create a Python virtual environment (using Python 3)
+mkvirtualenv pynetoptix -p python3
+
+# Install development dependencies
+pip install -r requirements.txt
+
+# Run unit tests
+python -m pytest tests/
+```
