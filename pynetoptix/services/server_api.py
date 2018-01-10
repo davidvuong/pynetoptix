@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from pynetoptix.core import http
+import urllib.parse
 
 
 class ServerApi:
@@ -14,4 +15,9 @@ class ServerApi:
 
         if 'source' not in kwargs and 'caption' not in kwargs and 'description' not in kwargs:
             raise ValueError('Either source, caption, or description must be set')
+
+        qs = {k: v for k, v in kwargs.items() if v is not None}
+        qs = urllib.parse.urlencode(qs)
+        endpoint = f'{endpoint}?{qs}' if qs else endpoint
+
         return http.get(endpoint, headers=self.config.headers)
