@@ -36,3 +36,7 @@ def post(endpoint, payload=None, headers=None):
     response = urllib.request.urlopen(url_request, data)
     data = response.read().decode(response.headers.get_content_charset() or 'utf-8')
     return json.loads(data)
+
+
+def parse_qs(**kwargs):
+    return '&'.join([f'{k}={urllib.parse.quote(str(v))}' for k, v in kwargs.items() if v is not None])
