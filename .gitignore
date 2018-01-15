@@ -1,1 +1,3 @@
 .cache/
+pynetoptix.egg-info/
+dist/
