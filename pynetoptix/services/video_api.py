@@ -12,7 +12,12 @@ class VideoApi:
 
     def get_rtsp_stream_url(self, camera_id, **kwargs):
         """http://demo.networkoptix.com:7001/static/index.html#/developers/api/%3CcameraId%3E"""
-        endpoint = f'{self.config.endpoint}/{camera_id}'
+        username = self.config.username
+        password = self.config.password
+        host = self.config.host
+        port = self.config.port
+
+        endpoint = f'rtsp://{username}:{password}@{host}:{port}/{camera_id}'
         return self._get_url(endpoint, **kwargs)
 
     def get_direct_download_url(self, camera_id, container_format, **kwargs):

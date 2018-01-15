@@ -5,11 +5,18 @@ import uuid
 class TestVideoApi:
     vms_host = 'demo.networkoptix.com'
     vms_port = 7001
-    client = pynetoptix.create_client('demo', 'nxwitness', host=vms_host, port=vms_port)
+    username = 'demo'
+    password = 'port'
+    client = pynetoptix.create_client(username, password, host=vms_host, port=vms_port)
 
     def test_get_rtsp_stream_url_allow_empty_args(self):
         camera_id = uuid.uuid4()
-        url = f'http://{self.vms_host}:{self.vms_port}/{camera_id}'
+        host = self.vms_host
+        port = self.vms_port
+        username = self.username
+        password = self.password
+
+        url = f'rtsp://{username}:{password}@{host}:{port}/{camera_id}'
         assert self.client.video.get_rtsp_stream_url(camera_id) == url
 
     def test_get_direct_download_url_allow_empty_args(self):
