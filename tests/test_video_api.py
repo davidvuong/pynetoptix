@@ -25,3 +25,13 @@ class TestVideoApi:
 
         url = f'http://{self.vms_host}:{self.vms_port}/hls/{camera_id}.{container_format}?duration={duration}'
         assert self.client.video.get_direct_download_url(camera_id, container_format, duration=duration) == url
+
+    def test_get_hls_stream_url_allow_empty_args(self):
+        camera_id = uuid.uuid4()
+        url = f'http://{self.vms_host}:{self.vms_port}/hls/{camera_id}.m3u'
+        assert self.client.video.get_hls_stream_url(camera_id) == url
+
+    def test_get_http_stream_url_allow_empty_args(self):
+        camera_id = uuid.uuid4()
+        url = f'http://{self.vms_host}:{self.vms_port}/media/{camera_id}.webm'
+        assert self.client.video.get_http_stream_url(camera_id) == url
