@@ -35,3 +35,42 @@ pip install -r requirements.txt
 # Run unit tests
 python -m pytest tests/
 ```
+
+## Deployment
+
+PyPi deployments are manual for now. I'll need to configure CI to auto deploy on git branches. However until then, the process is as follows:
+
+1. Bump the version number `pynetoptix.__version__`
+
+    ```python
+    __version_info__ = (0, 0, 1)
+    __version__ = '.'.join([str(i) for i in __version_info__])
+    ```
+
+1. Commit, tag, and push your version bump:
+
+    ```bash
+    git add .
+    git commit -m "chore(pkg): bump 0.0.1"
+    git tag -a "v0.0.1" -m "chore(pkg): bump 0.0.1"
+    git push && git push --tags
+    ```
+
+1. Build a new distribution and upload to PyPi:
+
+    ```bash
+    python setup.py sdist
+
+    pip install twine
+    twine upload dist/*
+    ```
+
+**NOTE:** You might get warnings around having a misconfigured `~/.pypirc` file. Create one if you haven't and make sure it contains:
+
+```
+[pypi]
+username = <username>
+password = <password>
+```
+
+Ask another developer for the `username` and `password`.
