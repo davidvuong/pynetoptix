@@ -36,7 +36,6 @@ class ServerApi:
             'schedule': '',
             'system': False,
         }
-        print(endpoint)
         return http.post(endpoint, payload, headers=self.config.headers)
 
     def get_event_rules(self):
