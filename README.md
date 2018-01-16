@@ -59,10 +59,9 @@ PyPi deployments are manual for now. I'll need to configure CI to auto deploy on
 1. Build a new distribution and upload to PyPi:
 
     ```bash
-    python setup.py sdist
-
     pip install twine
-    twine upload dist/*
+    python setup.py sdist
+    twine upload dist/pynetoptix-0.0.1.tar.gz
     ```
 
 **NOTE:** You might get warnings around having a misconfigured `~/.pypirc` file. Create one if you haven't and make sure it contains:
