@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 from pynetoptix.core import http
 
 
@@ -19,6 +20,24 @@ class ServerApi:
         endpoint = f'{endpoint}?{qs}' if qs else endpoint
 
         return http.get(endpoint, headers=self.config.headers)
+
+    def create_event_rule(self, action_type, action_params, comment):
+        endpoint = f'{self.config.endpoint}/ec2/saveEventRule'
+        payload = {
+            'actionParams': json.dumps(action_params),
+            'actionResourceIds': [],
+            'actionType': action_type,  # e.g. 'showTextOverlayAction',
+            'aggregationPeriod': 0,
+            'comment': comment,
+            'disabled': False,
+            'eventCondition': '',
+            'eventResourceIds': [],
+            'eventType': 'UserDefinedEvent',
+            'schedule': '',
+            'system': False,
+        }
+        print(endpoint)
+        return http.post(endpoint, payload, headers=self.config.headers)
 
     def get_event_rules(self):
         """Retrieves the entire list of event rules in your Nx Server."""
