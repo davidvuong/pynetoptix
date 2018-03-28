@@ -7,10 +7,10 @@ setup(
     name='pynetoptix',
     version=__version__,
     description="A simple Python wrapper over NetworkOptix' HTTP API",
-    url='https://github.com/davidvuong/pynetoptix',
+    url='https://github.com/ImageIntelligence/pynetoptix',
 
     author='David Vuong',
-    author_email='david.vuong256@gmail.com',
+    author_email='david@imageintellience.com',
 
     classifiers=[
         'Intended Audience :: Developers',
@@ -18,6 +18,7 @@ setup(
         'Topic :: Utilities',
 
         'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
 
