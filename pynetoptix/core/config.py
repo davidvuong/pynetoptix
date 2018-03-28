@@ -12,11 +12,16 @@ class Config:
 
     @property
     def endpoint(self):
-        return f'{self.protocol}://{self.host}:{self.port}'
+        return '{protocol}://{host}:{port}'.format(
+            protocol=self.protocol,
+            host=self.host,
+            port=self.port,
+        )
 
     @property
     def headers(self):
-        basic_auth = base64.b64encode(f'{self.username}:{self.password}'.encode('utf-8')).decode('utf-8')
+        auth = '{username}:{password}'.format(username=self.username, password=self.password).encode('utf-8')
+        basic_auth = base64.b64encode(auth).decode('utf-8')
         return {
-            'Authorization': f'Basic {basic_auth}',
+            'Authorization': 'Basic {basic_auth}'.format(basic_auth=basic_auth),
         }
