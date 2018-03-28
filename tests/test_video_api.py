@@ -16,13 +16,24 @@ class TestVideoApi:
         username = self.username
         password = self.password
 
-        url = f'rtsp://{username}:{password}@{host}:{port}/{camera_id}'
+        url = 'rtsp://{username}:{password}@{host}:{port}/{camera_id}'.format(
+            username=username,
+            password=password,
+            host=host,
+            port=port,
+            camera_id=camera_id,
+        )
         assert self.client.video.get_rtsp_stream_url(camera_id) == url
 
     def test_get_direct_download_url_allow_empty_args(self):
         camera_id = uuid.uuid4()
         container_format = 'mkv'
-        url = f'http://{self.vms_host}:{self.vms_port}/hls/{camera_id}.{container_format}'
+        url = 'http://{vms_host}:{vms_port}/hls/{camera_id}.{container_format}'.format(
+            vms_host=self.vms_host,
+            vms_port=self.vms_port,
+            camera_id=camera_id,
+            container_format=container_format,
+        )
         assert self.client.video.get_direct_download_url(camera_id, container_format) == url
 
     def test_get_direct_download_url_encodes_qs(self):
@@ -30,15 +41,29 @@ class TestVideoApi:
         container_format = 'mkv'
         duration = 10
 
-        url = f'http://{self.vms_host}:{self.vms_port}/hls/{camera_id}.{container_format}?duration={duration}'
+        url = 'http://{vms_host}:{vms_port}/hls/{camera_id}.{container_format}?duration={duration}'.format(
+            vms_host=self.vms_host,
+            vms_port=self.vms_port,
+            camera_id=camera_id,
+            container_format=container_format,
+            duration=duration,
+        )
         assert self.client.video.get_direct_download_url(camera_id, container_format, duration=duration) == url
 
     def test_get_hls_stream_url_allow_empty_args(self):
         camera_id = uuid.uuid4()
-        url = f'http://{self.vms_host}:{self.vms_port}/hls/{camera_id}.m3u'
+        url = 'http://{vms_host}:{vms_port}/hls/{camera_id}.m3u'.format(
+            vms_host=self.vms_host,
+            vms_port=self.vms_port,
+            camera_id=camera_id,
+        )
         assert self.client.video.get_hls_stream_url(camera_id) == url
 
     def test_get_http_stream_url_allow_empty_args(self):
         camera_id = uuid.uuid4()
-        url = f'http://{self.vms_host}:{self.vms_port}/media/{camera_id}.webm'
+        url = 'http://{vms_host}:{vms_port}/media/{camera_id}.webm'.format(
+            vms_host=self.vms_host,
+            vms_port=self.vms_port,
+            camera_id=camera_id,
+        )
         assert self.client.video.get_http_stream_url(camera_id) == url

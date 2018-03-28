@@ -8,11 +8,12 @@ class ServerApi:
         self.config = config
 
     def ping(self):
-        return http.get(f'{self.config.endpoint}/api/ping', headers=self.config.headers)
+        endpoint = self.config.endpoint + '/api/ping'
+        return http.get(endpoint, headers=self.config.headers)
 
     def create_event(self, **kwargs):
         """Creates a 'generic'/'userDefined' event."""
-        endpoint = f'{self.config.endpoint}/api/createEvent'
+        endpoint = self.config.endpoint + '/api/createEvent'
 
         if 'source' not in kwargs and 'caption' not in kwargs and 'description' not in kwargs:
             raise ValueError('Either source, caption, or description must be set')
@@ -22,7 +23,7 @@ class ServerApi:
         return http.get(endpoint, headers=self.config.headers)
 
     def create_event_rule(self, action_type, action_params, comment):
-        endpoint = f'{self.config.endpoint}/ec2/saveEventRule'
+        endpoint = self.config.endpoint + '/ec2/saveEventRule'
         payload = {
             'actionParams': json.dumps(action_params),
             'actionResourceIds': [],
@@ -40,7 +41,7 @@ class ServerApi:
 
     def get_event_rules(self):
         """Retrieves the entire list of event rules in your Nx Server."""
-        endpoint = f'{self.config.endpoint}/ec2/getEventRules'
+        endpoint = self.config.endpoint + '/ec2/getEventRules'
         return http.get(endpoint, headers=self.config.headers)
 
     def update_event_rule(self, rule):
@@ -48,7 +49,7 @@ class ServerApi:
 
         @see: https://support.networkoptix.com/hc/en-us/articles/115016055728
         """
-        endpoint = f'{self.config.endpoint}/ec2/saveEventRule'
+        endpoint = self.config.endpoint + '/ec2/saveEventRule'
         return http.post(endpoint, payload=rule, headers=self.config.headers)
 
     def update_event_rule_by_id(self, rule_id, **kwargs):

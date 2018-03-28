@@ -39,4 +39,6 @@ def post(endpoint, payload=None, headers=None):
 
 
 def parse_qs(**kwargs):
-    return '&'.join([f'{k}={urllib.parse.quote(str(v))}' for k, v in kwargs.items() if v is not None])
+    return '&'.join([
+        '{k}={v}'.format(k=k, v=urllib.parse.quote(str(v))) for k, v in kwargs.items() if v is not None
+    ])
