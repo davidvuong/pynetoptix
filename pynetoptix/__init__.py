@@ -6,7 +6,7 @@ from pynetoptix.services.system_api import SystemApi
 from pynetoptix.services.server_api import ServerApi
 from pynetoptix.services.video_api import VideoApi
 
-__version_info__ = (0, 0, 5)
+__version_info__ = (0, 0, 6)
 __version__ = '.'.join([str(i) for i in __version_info__])
 
 __author__ = 'David Vuong'
