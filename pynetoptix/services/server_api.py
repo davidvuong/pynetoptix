@@ -18,7 +18,7 @@ class ServerApi:
         if 'source' not in kwargs and 'caption' not in kwargs and 'description' not in kwargs:
             raise ValueError('Either source, caption, or description must be set')
         qs = http.parse_qs(**kwargs)
-        endpoint = f'{endpoint}?{qs}' if qs else endpoint
+        endpoint = '{endpoint}?{qs}'.format(endpoint=endpoint, qs=qs) if qs else endpoint
 
         return http.get(endpoint, headers=self.config.headers)
 
